@@ -17,5 +17,5 @@ func main() {
 	watcherServer.AddWatcher(wh)
 	watcherServer.AddWatcher(w)
 
-	watcherServer.Run(3000)
+	watcherServer.Run(":3000")
 }

@@ -18,12 +18,12 @@ type HederaWatcherServer struct {
 	watchers []interfaces.Watcher
 }
 
-func (server *HederaWatcherServer) Run(port int) {
+func (server *HederaWatcherServer) Run(addr string) {
 	server.start()
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
-	log.Println(fmt.Sprintf("Listening on port %d", port))
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), r))
+	log.Println(fmt.Sprintf("Listening on port %s", addr))
+	log.Fatal(http.ListenAndServe(addr, r))
 }
 
 func (server *HederaWatcherServer) AddWatcher(watcher interfaces.Watcher) {
