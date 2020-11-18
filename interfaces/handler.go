@@ -1,5 +1,5 @@
 package interfaces
 
 type Handler interface {
-	Handle([]byte) error
+	Handle([]byte)
 }

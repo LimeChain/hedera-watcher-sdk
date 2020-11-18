@@ -11,9 +11,8 @@ type WatchHandler struct {
 	messageType string
 }
 
-func (t *WatchHandler) Handle([]byte) error {
+func (t *WatchHandler) Handle([]byte) {
 	log.Println("handling message...")
-	return nil
 }
 
 func (t *WatchHandler) Watch(queue *queue.Queue) {

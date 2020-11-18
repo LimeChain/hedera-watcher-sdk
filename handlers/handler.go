@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"errors"
+	"fmt"
 	"github.com/limechain/hedera-watcher-sdk/interfaces"
 	"github.com/limechain/hedera-watcher-sdk/types"
 	"log"
@@ -20,9 +22,10 @@ func (h *Handler) Handle(ch <-chan *types.Message) {
 
 func (h *Handler) handleMessage(msg *types.Message) error {
 	handler := h.handlers[msg.Type]
-	if err := handler.Handle(msg.Payload); err != nil {
-		return err
+	if handler == nil {
+		return errors.New(fmt.Sprintf("Handler for message type [%s] not found.", msg.Type))
 	}
+	handler.Handle(msg.Payload)
 
 	return nil
 }
