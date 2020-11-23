@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/limechain/hedera-watcher-sdk/interfaces"
+	"github.com/limechain/hedera-watcher-sdk/queue"
 	"github.com/limechain/hedera-watcher-sdk/types"
 	"log"
 )
@@ -32,6 +33,12 @@ func (h *Handler) handleMessage(msg *types.Message) error {
 
 func (h *Handler) AddHandler(messageType string, handler interfaces.Handler) {
 	h.handlers[messageType] = handler
+}
+
+func (h *Handler) Recover(q *queue.Queue) {
+	for _, handler := range h.handlers {
+		go handler.Recover(q)
+	}
 }
 
 func NewHandler() *Handler {

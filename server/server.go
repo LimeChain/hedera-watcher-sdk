@@ -38,6 +38,7 @@ func (server *HederaWatcherServer) start() {
 	ch := make(chan *types.Message)
 	server.queue = queue.NewQueue(ch)
 	go server.handler.Handle(ch)
+	go server.handler.Recover(server.queue)
 	go server.startWatchers()
 }
 

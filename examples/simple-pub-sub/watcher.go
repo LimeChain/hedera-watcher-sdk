@@ -15,7 +15,7 @@ func (t *Watcher) Watch(queue *queue.Queue) {
 	go func() {
 		for true {
 			msg := &types.Message{
-				Payload: nil,
+				Payload: []byte("[2] pushing message..."),
 				Type:    t.messageType,
 			}
 			log.Println("[2] pushing message...")
