@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/go-chi/chi"
 	"github.com/limechain/hedera-watcher-sdk/server"
 )
 
@@ -9,6 +10,7 @@ const (
 )
 
 func main() {
+	router := chi.NewRouter()
 	wh := NewWatcherHandler(MessageType)
 	w := NewWatcher(MessageType)
 
@@ -17,5 +19,5 @@ func main() {
 	watcherServer.AddWatcher(wh)
 	watcherServer.AddWatcher(w)
 
-	watcherServer.Run(":3000")
+	watcherServer.Run(router, ":3000")
 }
