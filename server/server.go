@@ -3,7 +3,6 @@ package server
 import (
 	"fmt"
 	"github.com/go-chi/chi"
-	"github.com/go-chi/chi/middleware"
 	"github.com/limechain/hedera-watcher-sdk/handlers"
 	"github.com/limechain/hedera-watcher-sdk/interfaces"
 	"github.com/limechain/hedera-watcher-sdk/queue"
@@ -18,9 +17,8 @@ type HederaWatcherServer struct {
 	watchers []interfaces.Watcher
 }
 
-func (server *HederaWatcherServer) Run(router chi.Router, addr string) {
+func (server *HederaWatcherServer) Run(router *chi.Mux, addr string) {
 	server.start()
-	router.Use(middleware.Logger)
 	log.Println(fmt.Sprintf("Listening on port %s", addr))
 	log.Fatal(http.ListenAndServe(addr, router))
 }
