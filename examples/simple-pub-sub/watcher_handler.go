@@ -29,14 +29,6 @@ func (t *WatchHandler) Watch(queue *queue.Queue) {
 	}()
 }
 
-func (t *WatchHandler) Recover(queue *queue.Queue) {
-	log.Println("recovering...")
-	queue.Push(&types.Message{
-		Payload: []byte("recovery message"),
-		Type:    t.messageType,
-	})
-}
-
 func NewWatcherHandler(messageType string) *WatchHandler {
 	return &WatchHandler{messageType}
 }
